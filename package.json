@@ -1,0 +1,22 @@
+{
+  "name": "sequelize-practice",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "mocha -w test/*.spec.js",
+    "grade": "mocha --reporter spec --timeout 300 test/*.spec.js",
+    "db-init": "pg-init checkpoint_sequelize_practice",
+    "postinstall": "npm run db-init"
+  },
+  "dependencies": {
+    "bluebird": "3.0.6",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.5.0"
+  },
+  "devDependencies": {
+    "chai": "3.4.1",
+    "fs-misc": "^2.0.0",
+    "mocha": "2.3.4"
+  }
+}

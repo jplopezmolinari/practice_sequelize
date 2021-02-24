@@ -1,0 +1,7 @@
+{
+  "database": "checkpoint_sequelize_practice",
+  "dialect": "postgres",
+  "logging": false,
+  "username" : "postgres",
+  "password" : ""
+}
