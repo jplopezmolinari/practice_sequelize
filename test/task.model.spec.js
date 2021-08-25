@@ -27,12 +27,12 @@ describe("Task", function () {
 
   describe("Virtual getters", function () {
     describe("timeRemaining", function () {
-      xit("retorna el valor Infinity si el task no tiene una fecha de entrega (`due`)", function () {
+      it("retorna el valor Infinity si el task no tiene una fecha de entrega (`due`)", function () {
         var task = Task.build();
         expect(task.timeRemaining).to.equal(Infinity);
       });
 
-      xit("retorna la diferencia entre la fecha de entrega y ahora", function () {
+      it("retorna la diferencia entre la fecha de entrega y ahora", function () {
         var oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
 
         // crea un task con fecha de entrega a un dia de este punto en el tiempo
@@ -45,14 +45,14 @@ describe("Task", function () {
     });
 
     describe("overdue", function () {
-      xit("es overdue si el due esta en el pasado", function () {
+      it("es overdue si el due esta en el pasado", function () {
         var task = Task.build({
           due: helper.dates.yesterday(),
         });
         expect(task.overdue).to.be.true;
       });
 
-      xit("no esta overdue si la tarea esta en el pasado pero complete es igual a true", function () {
+      it("no esta overdue si la tarea esta en el pasado pero complete es igual a true", function () {
         var task = Task.build({
           due: helper.dates.yesterday(),
           complete: true,
@@ -60,7 +60,7 @@ describe("Task", function () {
         expect(task.overdue).to.be.false;
       });
 
-      xit("no es overdue si el due date es en el futuro", function () {
+      it("no es overdue si el due date es en el futuro", function () {
         var task = Task.build({
           due: helper.dates.tomorrow(),
         });
@@ -88,7 +88,7 @@ describe("Task", function () {
     });
 
     describe("clearCompleted", function () {
-      xit("remueve todos los tasks completos de la base de datos", function () {
+      it("remueve todos los tasks completos de la base de datos", function () {
         return Task.clearCompleted()
           .then(function () {
             return Task.findAll({ where: { complete: true } });
@@ -104,7 +104,7 @@ describe("Task", function () {
     });
 
     describe("completeAll", function () {
-      xit("marca todos los tasks incompletos como completos", function () {
+      it("marca todos los tasks incompletos como completos", function () {
         return Task.completeAll()
           .then(function () {
             return Task.findAll({ where: { complete: false } });
@@ -132,7 +132,7 @@ describe("Task", function () {
     });
 
     describe("addChild", function () {
-      xit("debería retornar una promesa para el nuevo hijo", function () {
+      it("debería retornar una promesa para el nuevo hijo", function () {
         return task.addChild({ name: "task2" }).then(function (child) {
           expect(child.name).to.equal("task2");
           expect(child.parentId).to.equal(task.id);
@@ -145,7 +145,7 @@ describe("Task", function () {
         return task.addChild({ name: "foo" });
       });
 
-      xit("debería retornar una promesa para un arreglo de tareas hijas", function () {
+      it("debería retornar una promesa para un arreglo de tareas hijas", function () {
         return task.getChildren().then(function (children) {
           expect(children).to.have.length(1);
           expect(children[0].name).to.equal("foo");
@@ -166,7 +166,7 @@ describe("Task", function () {
       beforeEach(childBuilder);
       beforeEach(childBuilder);
 
-      xit("retorna una promesa para un arreglo de hermanos", function () {
+      it("retorna una promesa para un arreglo de hermanos", function () {
         return childrenReferences[0].getSiblings().then(function (siblings) {
           expect(siblings).to.have.length(1);
           expect(siblings[0].id).to.equal(childrenReferences[1].id);
@@ -201,7 +201,7 @@ describe("Task", function () {
     });
 
     describe("remover", function () {
-      xit("tambien remueve todos los tasks hijos", function () {
+      it("tambien remueve todos los tasks hijos", function () {
         return studyTask
           .destroy()
           .then(function () {
